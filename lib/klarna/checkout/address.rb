@@ -2,7 +2,8 @@ module Klarna
   module Checkout
     class Address < Resource
       attr_accessor :given_name, :family_name, :care_of, :street_address,
-                    :postal_code, :city, :country, :email, :phone
+                    :postal_code, :city, :country, :email, :phone,
+                    :reference, :organization_name
 
       def as_json
         json_sanitize({
@@ -14,7 +15,9 @@ module Klarna
           :city           => @city,
           :country        => @country,
           :email          => @email,
-          :phone          => @phone
+          :phone          => @phone,
+          :reference	  => @reference,
+          :organization_name => @organization_name
         })
       end
     end
