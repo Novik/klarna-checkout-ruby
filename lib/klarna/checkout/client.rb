@@ -60,10 +60,10 @@ module Klarna
         Order.new(JSON.parse(response.body))
       end
 
-      def update_order(order)
+      def update_order(order, *keys)
         return false unless order.valid?
 
-        response = write_order(order)
+        response = write_order(order, keys)
         Order.new(JSON.parse(response.body))
       end
 
@@ -99,11 +99,11 @@ module Klarna
 
       private
 
-      def write_order(order)
+      def write_order(order, keys = [])
         path  = "/checkout/orders"
         path += "/#{order.id}" if order.id
 
-        request_body = order.to_json
+        request_body = order.to_json( *keys )
         response = https_connection.post do |req|
           req.url path
 

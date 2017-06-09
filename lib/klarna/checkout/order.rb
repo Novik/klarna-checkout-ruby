@@ -46,8 +46,6 @@ module Klarna
         end
         if status != 'created'
           json.delete(:status)
-        else
-          json.slice!(:status) 
         end
 
         json
