@@ -8,7 +8,7 @@ module Klarna
 
       attr_accessor :id, :status, :reference, :reservation, :started_at,
                     :completed_at, :created_at, :last_modified_at, :expires_at,
-                    :locale, :merchant_order_data
+                    :locale, :merchant_order_data, :options
 
       attr_accessor :purchase_country, :purchase_currency
 
@@ -36,7 +36,8 @@ module Klarna
           :merchant => @merchant.as_json,
           :status => status,
           :shipping_address => (@shipping_address && @shipping_address.as_json),
-          :customer => (@customer && @customer.as_json)
+          :customer => (@customer && @customer.as_json),
+          :options => @options
         })
         if id || json[:gui].nil?
           json.delete(:gui)
